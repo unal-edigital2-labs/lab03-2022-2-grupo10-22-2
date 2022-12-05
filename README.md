@@ -257,3 +257,13 @@ end
 
 endmodule
 ```
+## camara.v
+Camara.v es el archivo top de los perifericos, desde donde se instancian cada uno de los modulos anteriormente explicados y desde donde se obtienen los relojes que los manejan.
+
+En este archivo si se describen los pines que seran conectados fisicamente a los componentes, tanto de la camara como de la pantalla VGA, esto pues camara.v sera el puente junto al driver en python que enmascara el verilog para poder trabajarlo mas adelante por software mediante lenguaje C.
+
+Como atributos extra que se le van a instanciar al sistema de verilog a parte de los pines de los perifericos estan 2 puertos tipo wire o cable, data_mem y dir_mem, estos 2 seran tomados como señales de estatus para obtener el valor de los pixeles en memoria mediante el software.
+
+Siendo asi, resumidamente, como ya se menciono mas arriba, este archivo solo se encarga de instanciar los modulos anteriormente creados y hacer las conexiones entre si, para eso definimos varios cables, que conectaran las salidas y entradas de los perifericos entre si.
+
+Nota: Cabe mencionar que se obtuvo otro modulo en verilog que no se explico, el encargado de generar los relojes que usan los prefirericos, clk24_25_nexys4 clk25_24, este se obtuvo usando la herramienta de vivado clocking wizard, esta herramienta nos genero dos relojes derivados del clock principal, uno de 24MHz para el uso de la camara y uno de  25Mhz para el uso de la pantalla, estas señales se conectaron a sus respectivos perifericos mediante wires.
