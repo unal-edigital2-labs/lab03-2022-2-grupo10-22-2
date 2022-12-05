@@ -185,3 +185,8 @@ initial begin
 end
 endmodule
 ```
+
+## VGA_driver
+VGA_driver, como su nomre lo indica, es el "driver" o codigo que nos intrepreta los bits y nos genera las señales de sincronizacion y datos en el formato que los entienda la pantalla VGA, para esto se hacen los calculos de timings para una pantalla 640x480 y se le asignan los resultados a las señales de salida que usara la pantalla para sincronizarse y mostrar los datos.
+
+El modulo como entrada tiene las señales de reloj, reset y los datos, y como salida nos arroja la sincronizacion vertical y horizontal y el valor del pixel en un formato de salida de 12 bits que mas adelante se descompondra por pines para llevarlos al conector VGA
