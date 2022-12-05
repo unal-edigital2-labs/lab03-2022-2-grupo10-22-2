@@ -135,3 +135,54 @@ Lo anterior lo logramos mediante un registro matricial de 2^15 * 12 bits, el cua
 Sumado a lo anterior, ese modulo tiene la caracteristica de ser de doble canal, es decir que se puede leer y escribir al mismo tiempo, para añadir la funcion de lectura, añadimos 2 registros de salida, 1 para direccion y 1 para datos, los cuales mas adelante usaremos para definir la imagen a procesar.
 
 Nota: Cabe aclarar que la lectura y escritura de la memoria se hacen en base a 2 relojes distintos, los relojes de la VGA y de la camara respectivamente, esto pues estos tiempos  son los que nos describen cuando se quiere leer un dato y cuando se quere escribir uno, pues la camara es la que proporciona los datos y la VGA la que los consume.
+
+El codigo que describe la memoria es el siguiente:
+
+```
+module buffer_ram_dp#(
+	parameter AW = 15,		 // Cantidad de bits  de la direccion.
+	parameter DW = 12,		 // Cantidad de Bits de los datos.
+	// Absolute address in Esteban's computer
+	parameter imageFILE = "/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SocProject/sw/module/verilog/camara/imagen.men")
+	
+	(
+	input clk_w,     		 // Frecuencia de toma de datos de cada pixel.
+	input [AW-1: 0] addr_in, // DirecciÃ³n entrada dada por el capturador.
+	input [DW-1: 0] data_in, // Datos que entran de la cÃ¡mara.
+	input regwrite,		  	 // Enable.
+
+	input clk_r, 				    // Reloj 25MHz VGA.
+	input [AW-1: 0] addr_out, 		// DirecciÃ³n de salida dada por VGA.
+	output reg [DW-1: 0] data_out,	// Datos enviados a la VGA.
+	output reg [AW-1: 0] dirc_out	// Datos enviados a la VGA.	// Datos enviados a la VGA.
+	//input reset					// De momento no se esta usando.
+	);
+
+// Calcular el numero de posiciones totales de memoria.
+localparam NPOS = 2 ** AW; 			// Memoria.
+localparam imaSiz=160*120;
+reg [DW-1: 0] ram [0: NPOS-1];
+// Escritura  de la memoria port 1.
+always @(posedge clk_w) begin
+       if (regwrite == 1)
+// Escribe los datos de entrada en la direcciÃ³n que addr_in se lo indique.
+             ram[addr_in] <= data_in;
+end
+
+// Lectura  de la memoria port 2.
+always @(posedge clk_r) begin
+// Se leen los datos de las direcciones addr_out y se sacan en data_out.
+		data_out <= ram[addr_out];
+		dirc_out <= addr_out;
+end
+
+// Precargar un archivo hexadecimal en la memoria al momento de cargar el bitstream en la FPGA
+initial begin
+// Lee en hexadecimal (readmemb lee en binario) dentro de ram [1, pÃ¡g 217].
+	$readmemh(imageFILE, ram);
+	// En la posición n+1 (160*120) se guarda el color negro
+	ram[imaSiz] = 12'h0;
+	ram[15'hffff] = 12'h0; // Necesario par el procesamiento
+end
+endmodule
+```
