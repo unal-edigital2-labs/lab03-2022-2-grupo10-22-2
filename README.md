@@ -36,4 +36,4 @@ Teniendo ya la informacion de la imagen a tomar, se procede a diseñar las conex
 Debido a que la camara no posee memoria, lo primero que se ha de hacer es almacenar los datos en una memoria, de eso se hara cargo parcialmente cam_read.v, el cual lee los pines de datos a la frecuencia que dite un reloj de entrada al modulo.
 
 En este archivo tambien nos encargamos de unir los datos que saca la camara y mandarlos a la memoria donde los almacenaremos, esto lo hacemos mediante 2 registros de salida, que junto a 1 registro de habilitacion componen este modulo.
-Nota: Cabe aclarar que este modulo posee una maquina de 3 estados dependiendo el estado de lectura de la camara, esto pues al tener solo 8 pines de datos pero como el pixel tiene 12, debe pasar los datos en
+Nota: Cabe aclarar que este modulo posee una maquina de 3 estados dependiendo el estado de lectura de la camara, esto pues al tener solo 8 pines de datos pero como el pixel tiene 12, debe pasar los datos en 2 tandas, le la primera manda todo el rojo, en la segunda verde y aul, de eso se encrgar cam_read
