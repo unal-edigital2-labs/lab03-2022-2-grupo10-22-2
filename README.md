@@ -31,6 +31,8 @@ Bajando la resolucion a la mitad, se ve se el consumo de bits baja bastante, sin
 
 Con esta resolucion, se tiene que se deben guardar 19200 pixeles de 12 bits cada uno, asi, el tamaño en bits de posiciones de mi memoria sera 2^n=19200, que despejando n, nos da aproximadamente 14.2 bits, pero como no hay medios bits, se aproxima aal entero mayor mas cercano, es decir, que se necesitaran 15 bits para describir la posicon en memoria.
 
+Nota: Como aclaro hace poco, esta camara tiene unos registros internos configurables mediante I2C, nosotros esta parte de configuracion la decidimos hacer mediante arduino ya que por internet ya hay plantillas para la configuracion del periferico, y decidimos no gastar tiempo diseñando la configuracion por verilog, pues despues de cargar la configuracion, se puede desconectar el arduino mientras no se le quite la alimentacion a la camara.
+
 ## Cam_read
 Teniendo ya la informacion de la imagen a tomar, se procede a diseñar las conexiones mediante verilog de como va a a funcionar el modulo de la camara.
 Debido a que la camara no posee memoria, lo primero que se ha de hacer es almacenar los datos en una memoria, de eso se hara cargo parcialmente cam_read.v, el cual lee los pines de datos a la frecuencia que dicte un reloj de entrada al modulo y lo manda al modulo de memoria ram.
