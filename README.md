@@ -486,3 +486,7 @@ class Camara(Module,AutoCSR):
         self.ev.finalize()
         self.ev.ok.trigger.eq(self.clk)
 ```
+# Build Soc Project
+Este codigo en Python se encarga de generar los perifericos en base a los "drivers" hechos en python y los constraint del xdc de la tarjeta, permitiendo luego en codigo modificar o leer los pines mediante funciones predefinidas, haciendo mas facil el trabajo con muchos pines.
+
+Para nuestro Soc, dejamos la definicion de leds, switeches y botones, y añadiños los pines para la VGA y para la camara añadiendo el core o driver anteriormente programado. y "jalado" los pines necesarios para la conexion mediante un identificador dado a los pines en el constraint.
