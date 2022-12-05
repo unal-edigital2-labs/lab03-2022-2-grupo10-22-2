@@ -490,3 +490,5 @@ class Camara(Module,AutoCSR):
 Este codigo en Python se encarga de generar los perifericos en base a los "drivers" hechos en python y los constraint del xdc de la tarjeta, permitiendo luego en codigo modificar o leer los pines mediante funciones predefinidas, haciendo mas facil el trabajo con muchos pines.
 
 Para nuestro Soc, dejamos la definicion de leds, switeches y botones, y añadiños los pines para la VGA y para la camara añadiendo el core o driver anteriormente programado. y "jalado" los pines necesarios para la conexion mediante un identificador dado a los pines en el constraint.
+
+Nota: Cabe mencionar que para usar el core o driver de python hay que añadir los archivos de verilog para que pueda enmascarar la configuracion del periferico, esto se hace mediante Platform.add_source("Direccion_archivo").
