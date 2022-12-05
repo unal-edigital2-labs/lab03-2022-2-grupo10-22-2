@@ -128,3 +128,10 @@ always @(posedge CAM_pclk)begin
  end
 end
 ```
+## Memoria
+Como ya se anañizo anteriormente, para guardar el frame de la camara necesitaremos una memoria de 2^15 posiciones para alcanzar a cubrir todos los bits de informacion de la imagen, y cada uno de estas posiciones deberan tener 12 bits para almacenar el color completo del pixel.
+Lo anterior lo logramos mediante un registro matricial de 2^15 * 12 bits, el cual definimos en este archivo con el nombre de ram. Con este registro lo que se busca es guardar la informacion de la imagen que tomo la camara, es decir escribirla en memoria, para lo cual requeriremos 2 entradas, una para definirle una direccion y una para definirle un valor dentro de ram.
+
+Sumado a lo anterior, ese modulo tiene la caracteristica de ser de doble canal, es decir que se puede leer y escribir al mismo tiempo, para añadir la funcion de lectura, añadimos 2 registros de salida, 1 para direccion y 1 para datos, los cuales mas adelante usaremos para definir la imagen a procesar.
+
+Nota: Cabe aclarar que la lectura y escritura de la memoria se hacen en base a 2 relojes distintos, los relojes de la VGA y de la camara respectivamente, esto pues estos tiempos  son los que nos describen cuando se quiere leer un dato y cuando se quere escribir uno, pues la camara es la que proporciona los datos y la VGA la que los consume.
