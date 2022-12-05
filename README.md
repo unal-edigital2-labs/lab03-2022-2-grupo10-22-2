@@ -271,3 +271,164 @@ Siendo asi, resumidamente, como ya se menciono mas arriba, este archivo solo se 
 Nota: Cabe mencionar que se obtuvo otro modulo en verilog que no se explico, el encargado de generar los relojes que usan los prefirericos, clk24_25_nexys4 clk25_24, este se obtuvo usando la herramienta de vivado clocking wizard, esta herramienta nos genero dos relojes derivados del clock principal, uno de 24MHz para el uso de la camara y uno de  25Mhz para el uso de la pantalla, estas señales se conectaron a sus respectivos perifericos mediante wires.
 
 Por ultimo, este verilog tiene una funcion aparte de instanciar y unir los perifericos, y esta es redefinir el direccionamiento a memoria cuando se vayan a mostrar en pantalla pixeles que no tengan un valor definido en memoria, esto para apuntar todos esos valores desconocidos a la ultima posicion de memoria a la cual se le asigno el color negro en el modulo buffer_ram.
+El codigo de camara.v final es:
+
+```
+module camara #(
+		parameter AW = 15, // Cantidad de bits  de la dirección 
+		localparam DW=12 // Se determina de acuerdo al tamaño de la data, formaro RGB444 = 12 bites.
+		)(
+		//Entradas del test cam
+	    	input  clk,           	// Board clock: 100 MHz Nexys4DDR.
+    		input  rst,	 	// Reset button. Externo
+
+		// Salida VGA
+		output  VGA_Hsync_n,  // Horizontal sync output.
+		output  VGA_Vsync_n,  // Vertical sync output.
+		output  [3:0] VGA_R,  // 4-bit VGA red output.
+		output  [3:0] VGA_G,  // 4-bit VGA green output.
+		output  [3:0] VGA_B,  // 4-bit VGA blue output.
+
+		//CAMARA input/output conexiones de la camara 
+
+		output  CAM_xclk,		// System  clock input de la camara.
+		output  CAM_pwdn,		// Power down mode.
+		input  CAM_pclk,		// Senal PCLK (pixel clock) de la camara. 
+		input  CAM_href,		// Senal HREF de la camara. 
+		input  CAM_vsync,		// Senal VSYNC de la camara.
+		input  [7:0]CAM_px_data,
+		wire [DW-1:0] data_mem,    		// Salida de dp_ram al driver VGA y a software
+		wire [AW-1:0] dir_mem    		// Salida de dp_ram a software
+    
+	);
+
+
+	// TAMANO DE ADQUISICION DE LA CAMARA
+
+	parameter CAM_SCREEN_X = 160; 		// 640 / 4. Elegido por preferencia, menos memoria usada.
+	parameter CAM_SCREEN_Y = 120;    	// 480 / 4.
+	
+	localparam imaSiz= CAM_SCREEN_X*CAM_SCREEN_Y;// Posición n+1 del tamañp del arreglo de pixeles de acuerdo al formato.
+
+	// conexiondes del Clk
+	wire clk100M;           // Reloj de un puerto de la Nexys 4 DDR entrada.
+	wire clk25M;		// Para guardar el dato del reloj de la Pantalla (VGA 680X240 y DP_RAM).
+	wire clk24M;		// Para guardar el dato del reloj de la camara.
+
+	// Conexion dual por ram
+
+	wire [AW-1: 0] DP_RAM_addr_in;		// Conexión  Direccion entrada.
+	wire [DW-1: 0] DP_RAM_data_in;      	// Conexion Dato entrada.
+	wire DP_RAM_regW;			// Enable escritura de dato en memoria .
+
+	reg [AW-1: 0] DP_RAM_addr_out;		//Registro de la dirección de memoria. 
+	// Conexion VGA Driver
+	wire [DW-1:0] data_RGB444;  		// salida del driver VGA a la pantalla
+	wire [9:0] VGA_posX;			// Determinar la posición en X del pixel en la pantalla 
+	wire [9:0] VGA_posY;			// Determinar la posición de Y del pixel en la pantalla
+
+
+	/* ****************************************************************************
+	Asignación de la información de la salida del driver a los pines de la pantalla
+	**************************************************************************** */
+	assign VGA_R = data_RGB444[11:8]; 	//los 4 bites más significativos corresponden al color ROJO (RED) 
+	assign VGA_G = data_RGB444[7:4];  	//los 4 bites siguientes son del color VERDE (GREEN)
+	assign VGA_B = data_RGB444[3:0]; 	//los 4 bites menos significativos son del color AZUL(BLUE)
+	
+
+	/* ****************************************************************************
+	Asignacion de las seales de control xclk pwdn de la camara
+	**************************************************************************** */
+
+	assign CAM_xclk = clk24M;		// AsignaciÃ³n reloj cÃ¡mara.
+	assign CAM_pwdn = 0;			// Power down mode.
+	
+
+	/* ****************************************************************************
+	bloque que genera un reloj de 25Mhz usado para el VGA  y un reloj de 24 MHz
+	utilizado para la camara, estos a partir de una frecuencia de 100 Mhz que corresponde a la Nexys 4 	
+	----->modulo obtenido por clocking wizard<---
+	**************************************************************************** */
+
+
+	clk24_25_nexys4 clk25_24(
+	.clk24M(clk24M),
+	.clk25M(clk25M),
+	.reset(rst),
+	.clk100M(clk)
+	);
+
+
+	/* ****************************************************************************
+	Modulo de captura de datos  cam_read
+	**************************************************************************** */
+	
+	cam_read #(AW,DW) cam_read
+	(
+			.CAM_px_data(CAM_px_data),
+			.CAM_pclk(CAM_pclk),
+			.CAM_vsync(CAM_vsync),
+			.CAM_href(CAM_href),
+			.rst(rst),
+
+		//outputs
+		
+			.DP_RAM_regW(DP_RAM_regW), 
+			.DP_RAM_addr_in(DP_RAM_addr_in),
+			.DP_RAM_data_in(DP_RAM_data_in)
+
+		);
+
+
+	/* ****************************************************************************
+	buffer_ram_dp buffer memoria dual port y reloj de lectura y escritura separados
+	**************************************************************************** */
+
+	buffer_ram_dp DP_RAM(
+		// Entradas.
+		
+		.clk_w(CAM_pclk),			// Frecuencia de toma de datos de cada pixel.
+		.addr_in(DP_RAM_addr_in), 		// Direccion entrada dada por el capturador.
+		.data_in(DP_RAM_data_in),		// Datos que entran de la camara.
+		.regwrite(DP_RAM_regW), 	       	// Enable.
+		.clk_r(clk25M), 			// Reloj VGA.
+		.addr_out(DP_RAM_addr_out),		// Direccion salida dada por VGA.
+
+			// outputs
+			
+		.data_out(data_mem),		    	// Datos enviados a la VGA y a software
+		.dirc_out(dir_mem)			//Direcciones enviadas a software
+	);
+
+	/* ****************************************************************************
+	VGA_Driver640x480
+	**************************************************************************** */
+	VGA_Driver VGA_640x480 // driver pantalla.
+	(
+		.rst(rst),
+		.clk(clk25M), 			// 25MHz  para 60 hz de 160x120.
+		.pixelIn(data_mem), 		// Entrada del valor de color  pixel RGB 444.
+		.pixelOut(data_RGB444),		// Salida de datos a la VGA. (Pixeles). 
+		.Hsync_n(VGA_Hsync_n),		// Sennal de sincronizacion en horizontal negada para la VGA.
+		.Vsync_n(VGA_Vsync_n),		// Sennal de sincronizacion en vertical negada  para la VGA.
+		.posX(VGA_posX), 		// Posicion en horizontal del pixel siguiente.
+		.posY(VGA_posY) 		// posicinn en vertical  del pixel siguiente.
+
+	);
+
+
+	/* ****************************************************************************
+	Logica para actualizar el pixel acorde con la buffer de memoria y el pixel de
+	VGA si la imagen de la camara es menor que el display VGA, los pixeles
+	adicionales seran iguales al color del ultimo pixel de memoria.
+	**************************************************************************** */
+	always @ (VGA_posX, VGA_posY) begin
+			if ((VGA_posX>CAM_SCREEN_X-1)|(VGA_posY>CAM_SCREEN_Y-1))begin
+				DP_RAM_addr_out = imaSiz;
+			end
+			else begin
+				DP_RAM_addr_out = VGA_posX + VGA_posY * CAM_SCREEN_X;// Calcula posicion.
+			end
+	end
+endmodule
+```
