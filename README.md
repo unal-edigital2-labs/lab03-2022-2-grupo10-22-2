@@ -432,3 +432,7 @@ module camara #(
 	end
 endmodule
 ```
+#Camara.py
+El codigo que enmascara el verilog para poder trabajar con los perifericos mediante software es Camara.py, este script se encarga de asignar los pines definidos por el constraint o el xdc de la tarjeta que se este utilizando a las entradas y salidas definidas en el verilog; aparte de esto, asigna 2 registros status a los cables conectados a las salidas de datos y direcciones de la memoria para luego desde codigo C poder trabajar u operar sobre ellos.
+
+Al final, instancia todo asignando lo anteriormente dicho.
