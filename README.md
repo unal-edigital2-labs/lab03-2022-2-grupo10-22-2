@@ -27,4 +27,6 @@ Iniciando con el tema memoria, la nexys A7 tiene integrado 1188000 bits para mem
 
 Siendo esto asi, si quisieramos mostrar una imagen con el maximo tamaño resolucion y color posible, necesitariamos 307200*12=3686400 bits, cifra que supera por mucho los recursos con los que contamos,por esta razon se opto por reducir el tamaño de la imagen manteniendo la profundidad de color, esto pues se consifero que de por si RGB444 ya tiene una muy pobre profundidad de color.
 
-Bajando la resolucion a la mitad, se ve se el consumo de bits baja bastante, sin embargo roza el Mbit, lo que nos deja con poco espacio para almacenar mas informacion, por tanto, se decidio bajar la resolucion a la mitad otra vez, es decir dividirla en 4,quedando un formato de 160*120
+Bajando la resolucion a la mitad, se ve se el consumo de bits baja bastante, sin embargo roza el Mbit, lo que nos deja con poco espacio para almacenar mas informacion, por tanto, se decidio bajar la resolucion a la mitad otra vez, es decir dividirla en 4,quedando un formato de 160*120, con un formato de color RGB444.
+
+Con esta resolucion, se tiene que se deben guardar 19200 pixeles de 12 bits cada uno, asi, el tamaño en bits de posiciones de mi memoria sera 2^n=19200, que despejando n, nos da aproximadamente 14.2 bits, pero como no hay medios bits, se aproxima aal entero mayor mas cercano, es decir, que se necesitaran 15 bits para describir la posicon en memoria
