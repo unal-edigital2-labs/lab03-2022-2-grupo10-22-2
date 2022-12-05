@@ -29,4 +29,11 @@ Siendo esto asi, si quisieramos mostrar una imagen con el maximo tamaño resoluc
 
 Bajando la resolucion a la mitad, se ve se el consumo de bits baja bastante, sin embargo roza el Mbit, lo que nos deja con poco espacio para almacenar mas informacion, por tanto, se decidio bajar la resolucion a la mitad otra vez, es decir dividirla en 4,quedando un formato de 160*120, con un formato de color RGB444.
 
-Con esta resolucion, se tiene que se deben guardar 19200 pixeles de 12 bits cada uno, asi, el tamaño en bits de posiciones de mi memoria sera 2^n=19200, que despejando n, nos da aproximadamente 14.2 bits, pero como no hay medios bits, se aproxima aal entero mayor mas cercano, es decir, que se necesitaran 15 bits para describir la posicon en memoria
+Con esta resolucion, se tiene que se deben guardar 19200 pixeles de 12 bits cada uno, asi, el tamaño en bits de posiciones de mi memoria sera 2^n=19200, que despejando n, nos da aproximadamente 14.2 bits, pero como no hay medios bits, se aproxima aal entero mayor mas cercano, es decir, que se necesitaran 15 bits para describir la posicon en memoria.
+
+#Cam_read
+Teniendo ya la informacion de la imagen a tomar, se procede a diseñar las conexiones mediante verilog de como va a a funcionar el modulo de la camara.
+Debido a que la camara no posee memoria, lo primero que se ha de hacer es almacenar los datos en una memoria, de eso se hara cargo parcialmente cam_read.v, el cual lee los pines de datos a la frecuencia que dite un reloj de entrada al modulo.
+
+En este archivo tambien nos encargamos de unir los datos que saca la camara y mandarlos a la memoria donde los almacenaremos, esto lo hacemos mediante 2 registros de salida, que junto a 1 registro de habilitacion componen este modulo.
+Nota: Cabe aclarar que este modulo posee una maquina de 3 estados dependiendo el estado de lectura de la camara, esto pues al tener solo 8 pines de datos pero como el pixel tiene 12, debe pasar los datos en
