@@ -432,7 +432,57 @@ module camara #(
 	end
 endmodule
 ```
-#Camara.py
+# Camara.py
 El codigo que enmascara el verilog para poder trabajar con los perifericos mediante software es Camara.py, este script se encarga de asignar los pines definidos por el constraint o el xdc de la tarjeta que se este utilizando a las entradas y salidas definidas en el verilog; aparte de esto, asigna 2 registros status a los cables conectados a las salidas de datos y direcciones de la memoria para luego desde codigo C poder trabajar u operar sobre ellos.
 
-Al final, instancia todo asignando lo anteriormente dicho.
+Al final, instancia todo asignando lo anteriormente dicho obteninedo el siguiente codigo
+```
+class Camara(Module,AutoCSR):
+    def __init__(self, VGA_Vsync_n,VGA_Hsync_n,VGA_R,VGA_G,VGA_B,xclk,CAM_pwdn,pclk,cam_data_in,vsync,href):
+        self.clk = ClockSignal() # Reloj global   
+        self.rst = ResetSignal() # Reset Global
+        
+        #VGA
+        self.VGA_Vsync_n= VGA_Vsync_n # Sincronización vertical
+        self.VGA_Hsync_n= VGA_Hsync_n  # Sincronizacióñ horizontal
+        self.VGA_R= VGA_R
+        self.VGA_G= VGA_G
+        self.VGA_B= VGA_B
+        # Cámara
+        self.xclk = xclk    # 24 Señal de 24MHz
+        self.CAM_pwdn=CAM_pwdn
+        self.pclk = pclk     # Reloj de los datos
+        self.href = href
+        self.vsync = vsync  
+        self.px_data = cam_data_in # datos de la cámara
+        self.datamem= CSRStatus(16)
+        self.dirmem= CSRStatus(16)
+
+        self.specials +=Instance("camara",
+            i_clk = self.clk,
+            i_rst = self.rst,
+            o_VGA_Hsync_n=self.VGA_Hsync_n,
+            o_VGA_Vsync_n=self.VGA_Vsync_n,
+            o_VGA_R=self.VGA_R,  
+            o_VGA_G=self.VGA_G,
+            o_VGA_B=self.VGA_B,
+
+
+            # Camara
+            o_data_mem=self.datamem.status,
+            o_dir_mem=self.dirmem.status,
+            o_CAM_xclk = self.xclk,
+            o_CAM_pwdn=self.CAM_pwdn,
+            i_CAM_pclk = self.pclk,
+            i_CAM_href = href,        
+            i_CAM_vsync = vsync,
+            i_CAM_px_data=self.px_data,
+            
+
+        )
+       
+        self.submodules.ev = EventManager()
+        self.ev.ok = EventSourceProcess()
+        self.ev.finalize()
+        self.ev.ok.trigger.eq(self.clk)
+```
