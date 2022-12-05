@@ -23,4 +23,4 @@ En este caso nosotros escogimos la camara OV7670, dispositivo sin memoria el cua
 ### Consideraciones
 Para describir la camara, mas presisamente la imagen que ella va a tomar, ademas de conocer el modelo del dispositivos, tambien hay que tomar en cuenta las limitaciones del sistema que restringen lo que podemos o no hacer.
 
-Iniciando con el tema memoria, la nexys A7 tiene integrado 1188000 bits para memoria, ahora, si quisieramos mostrar una imagen con toda la resolucion y tamaño que nos permite la camara, necesitariamos almacenar en memoria, 640*480
+Iniciando con el tema memoria, la nexys A7 tiene integrado 1188000 bits para memoria, ahora, si quisieramos mostrar una imagen con toda la resolucion y tamaño que nos permite la camara, necesitariamos almacenar en memoria, 640*480=307200 pixeles, la informacion de estos pixeles viene dada por sus componentes RGB, los cuales tienen  diferentes formatos dependiendo la profundidad en el color que se quiera, sin embargo, en nuestro caso nos vemos limitados a 4 bits por color, es decir RGB444, esto debido a que es el limite que soporta el conector vinculado a la nexys
