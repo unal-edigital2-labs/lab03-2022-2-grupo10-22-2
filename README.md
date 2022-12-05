@@ -147,15 +147,14 @@ module buffer_ram_dp#(
 	
 	(
 	input clk_w,     		 // Frecuencia de toma de datos de cada pixel.
-	input [AW-1: 0] addr_in, // DirecciÃ³n entrada dada por el capturador.
-	input [DW-1: 0] data_in, // Datos que entran de la cÃ¡mara.
+	input [AW-1: 0] addr_in, // Direccion de entrada dada por la camara.
+	input [DW-1: 0] data_in, // Datos que entran de la camara.
 	input regwrite,		  	 // Enable.
 
 	input clk_r, 				    // Reloj 25MHz VGA.
-	input [AW-1: 0] addr_out, 		// DirecciÃ³n de salida dada por VGA.
-	output reg [DW-1: 0] data_out,	// Datos enviados a la VGA.
-	output reg [AW-1: 0] dirc_out	// Datos enviados a la VGA.	// Datos enviados a la VGA.
-	//input reset					// De momento no se esta usando.
+	input [AW-1: 0] addr_out, 		// DirecciÃon de salida dada por VGA.
+	output reg [DW-1: 0] data_out,	// Datos enviados a salida.
+	output reg [AW-1: 0] dirc_out	// Direccion de datos enviados a salida.
 	);
 
 // Calcular el numero de posiciones totales de memoria.
