@@ -189,4 +189,71 @@ endmodule
 ## VGA_driver
 VGA_driver, como su nomre lo indica, es el "driver" o codigo que nos intrepreta los bits y nos genera las señales de sincronizacion y datos en el formato que los entienda la pantalla VGA, para esto se hacen los calculos de timings para una pantalla 640x480 y se le asignan los resultados a las señales de salida que usara la pantalla para sincronizarse y mostrar los datos.
 
-El modulo como entrada tiene las señales de reloj, reset y los datos, y como salida nos arroja la sincronizacion vertical y horizontal y el valor del pixel en un formato de salida de 12 bits que mas adelante se descompondra por pines para llevarlos al conector VGA
+El modulo como entrada tiene las señales de reloj, reset y los datos, y como salida nos arroja la sincronizacion vertical y horizontal y el valor del pixel en un formato de salida de 12 bits que mas adelante se descompondra por pines para llevarlos al conector VGA.
+
+El codigo de referencia que usamos es el siguiente
+
+```
+module VGA_Driver #(DW = 12) (
+	input rst,
+	input clk, 						// 25MHz  para 60 hz de 640x480
+	input  [DW - 1 : 0] pixelIn, 	// entrada del valor de color  pixel 
+	
+	output  [DW - 1 : 0] pixelOut, // salida del valor pixel a la VGA 
+	output  Hsync_n,		// señal de sincronización en horizontal negada
+	output  Vsync_n,		// señal de sincronización en vertical negada 
+	output  [9:0] posX, 	// posicion en horizontal del pixel siguiente
+	output  [9:0] posY 		// posicion en vertical  del pixel siguiente
+);
+
+localparam SCREEN_X = 640; 	// tamaño de la pantalla visible en horizontal 
+localparam FRONT_PORCH_X =16;  
+localparam SYNC_PULSE_X = 96;
+localparam BACK_PORCH_X = 48;
+localparam TOTAL_SCREEN_X = SCREEN_X+FRONT_PORCH_X+SYNC_PULSE_X+BACK_PORCH_X; 	// total pixel pantalla en horizontal 
+
+
+localparam SCREEN_Y = 480; 	// tamaño de la pantalla visible en Vertical 
+localparam FRONT_PORCH_Y =10;  
+localparam SYNC_PULSE_Y = 2;
+localparam BACK_PORCH_Y = 33;
+localparam TOTAL_SCREEN_Y = SCREEN_Y+FRONT_PORCH_Y+SYNC_PULSE_Y+BACK_PORCH_Y; 	// total pixel pantalla en Vertical 
+
+
+reg  [9:0] countX; // tamaño de 10 bits
+reg  [9:0] countY; // tamaño de 10 bits
+
+assign posX    = countX;
+assign posY    = countY;
+
+assign pixelOut = (countX<SCREEN_X) ? (pixelIn ) : (12'b0) ;
+
+// señales de sincrinización de la VGA.
+assign Hsync_n = ~((countX>=SCREEN_X+FRONT_PORCH_X) && (countX<SCREEN_X+SYNC_PULSE_X+FRONT_PORCH_X)); 
+assign Vsync_n = ~((countY>=SCREEN_Y+FRONT_PORCH_Y) && (countY<SCREEN_Y+FRONT_PORCH_Y+SYNC_PULSE_Y));
+
+
+always @(posedge clk) begin
+	if (rst) begin
+		countX <= (SCREEN_X+FRONT_PORCH_X-1);
+		countY <= (SCREEN_Y+FRONT_PORCH_Y-1);
+	end
+	else begin 
+		if (countX >= (TOTAL_SCREEN_X-1)) begin
+			countX <= 0;
+			if (countY >= (TOTAL_SCREEN_Y-1)) begin
+				countY <= 0;
+			end 
+			else begin
+				countY <= countY + 1;
+			end
+		end 
+		else begin
+			countX <= countX + 1;
+			countY <= countY;
+		end
+	end
+end
+
+endmodule
+```
