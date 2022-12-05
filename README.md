@@ -492,3 +492,14 @@ Este codigo en Python se encarga de generar los perifericos en base a los "drive
 Para nuestro Soc, dejamos la definicion de leds, switeches y botones, y añadiños los pines para la VGA y para la camara añadiendo el core o driver anteriormente programado. y "jalado" los pines necesarios para la conexion mediante un identificador dado a los pines en el constraint.
 
 Nota: Cabe mencionar que para usar el core o driver de python hay que añadir los archivos de verilog para que pueda enmascarar la configuracion del periferico, esto se hace mediante Platform.add_source("Direccion_archivo").
+# Primeras pruebas
+Debido a la configuracion inicial que se le dio a los pines en camara.v, la camara deberia de empezar a trasmitir video tan solo cargado el bitstream, esto se hizo para preliminarmente verificar el funcionamiento de la camara.
+##### Link prueba camara :https://drive.google.com/file/d/1YdM5BBfXedZHid7PMzZMwOZvfv5PpUln/view?usp=sharing
+
+# Software
+Para las pruebas del software en nuestro soc, usamos los regisros CSR que se comunican con el periferico mediante el bus wishbone, esto para crear una matriz 3d con el valor de color del pixel y con su direccion en memoria.
+
+Para probar esto imprimimos por pantalla el valor guardado a la vez mientras se añadia a la matriz. : https://drive.google.com/file/d/1v4_X1m2oQtQSrvsGDM5UdDI_EJWFdNGP/view?usp=sharing
+
+# Procesos faltantes
+Debido a los inconvenientes que se tuvo a lo largo del semestre con la tarjeta inicialmente usada, la zyboZ7 y su incapacidad de mostrar VGA, asi como el desistimiento de compañeros del grupo y incroporacion de nuevos a mitad de semestre, se atraso el avance del proyecto, quedando pendiente generar una matriz 3d con solo los componente RGB del frame capturado, compilar la libreria OpenCv para CPU risc-v, implementarla con la imagen matricial obtenida, asi como tambien modificar camara.V para que lo que muestre VGA sea la imagen que retorne mi software y no los pixeles generados por la camara.
