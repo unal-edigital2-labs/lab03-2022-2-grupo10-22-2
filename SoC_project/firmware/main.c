@@ -8,7 +8,7 @@
 #include <generated/csr.h>
 
 #include "delay.h"
-#include "display.h"
+#include "camara.c"
 
 static char *readstr(void)
 {
@@ -78,6 +78,7 @@ static void help(void)
 	puts("display                         - display test");
 	puts("rgbled                          - rgb led test");
 	puts("vga                             - vga test");
+	puts("camara                             - camara test");
 }
 
 static void reboot(void)
@@ -87,7 +88,7 @@ static void reboot(void)
 
 static void display_test(void)
 {
-	int i;
+/*	int i;
 	signed char defill = 0;	//1->left, -1->right, 0->.
 	
 	char txtToDisplay[40] = {0, DISPLAY_0, DISPLAY_1,DISPLAY_2,DISPLAY_3,DISPLAY_4,DISPLAY_5,DISPLAY_6,DISPLAY_7,DISPLAY_8,DISPLAY_9,DISPLAY_A,DISPLAY_B,DISPLAY_C,DISPLAY_D,DISPLAY_E,DISPLAY_F,DISPLAY_G,DISPLAY_H,DISPLAY_I,DISPLAY_J,DISPLAY_K,DISPLAY_L,DISPLAY_M,DISPLAY_N,DISPLAY_O,DISPLAY_P,DISPLAY_Q,DISPLAY_R,DISPLAY_S,DISPLAY_T,DISPLAY_U,DISPLAY_V,DISPLAY_W,DISPLAY_X,DISPLAY_Y,DISPLAY_Z,DISPLAY_DP,DISPLAY_TR,DISPLAY_UR};
@@ -112,6 +113,7 @@ static void display_test(void)
 		}
 		delay_ms(500);
 	}
+*/
 }
 
 static void led_test(void)
@@ -146,7 +148,7 @@ static void switch_test(void)
 		}
 	}
 }
-
+/*
 static void rgbled_test(void)
 {
 	unsigned int T = 128;
@@ -180,12 +182,14 @@ static void rgbled_test(void)
 	
 
 
-}
+} */
 
 
+/*
 static void vga_test(void)
+
 {
-	int x,y;
+	printf("Hola mundo");
 	
 	for(y=0; y<480; y++) {
 		for(x=0; x<640; x++) {
@@ -200,7 +204,59 @@ static void vga_test(void)
 			vga_cntrl_mem_we_write(1);
 		}
 	}
+	
 }
+*/
+
+static void camara_test(void){
+
+
+	unsigned short datin=0;
+	unsigned short dirin=0;
+	unsigned short dats[19200][2];
+	unsigned short i=0;
+
+	char in='f';
+	//unsigned short dats[2][19200];
+	
+//	printf("dat: %i", datin); 			
+//	printf(" dir: %i\n", dirin); 		
+		
+	while(!(buttons_in_read()&1)) {
+		datin=camara_cntrl_datamem_read();
+		dirin=camara_cntrl_dirmem_read();
+		
+			if (dirin!=19200){
+				printf("%i",i); 
+				printf("dat: %i", datin); 			
+        		printf(" dir: %i\n", dirin);
+				i++;
+		}
+		}
+		
+		/*
+		while (i<19200){		 
+			if(dirin!=19200){
+				datin=camara_cntrl_datamem_read();
+				dirin=camara_cntrl_dirmem_read();
+				dats[i][0]=dirin;
+				dats[i][1]=datin;
+				printf("%i",i); 		
+				printf("dir: %i", dats[i][0]); 			
+				printf(" dat: %i\n", dats[i][1]); 		
+				i++;
+				}
+			}
+		}
+		*/
+	}
+
+
+
+
+
+
+
 
 static void console_service(void)
 {
@@ -220,20 +276,30 @@ static void console_service(void)
 		switch_test();
 	else if(strcmp(token, "display") == 0)
 		display_test();
-	else if(strcmp(token, "rgbled") == 0)
-		rgbled_test();
-	else if(strcmp(token, "vga") == 0)
-		vga_test();
+//	else if(strcmp(token, "rgbled") == 0)
+//		rgbled_test();
+	//else if(strcmp(token, "vga") == 0)
+	//	vga_test();
+	else if(strcmp(token, "camara") == 0)
+		camara_test();
+//	else if(strcmp(token, "radar") == 0)
+//		radar_test();
+//    else if(strcmp(token, "motor") == 0)
+//		motor_test();
+//	else if(strcmp(token, "infra") == 0)
+//		infra_test();	
 	prompt();
+
 }
 
 int main(void)
 {
 	irq_setmask(0);
 	irq_setie(1);
+	camara_init();
 	uart_init();
 
-	puts("\nSoC - RiscV project UNAL 2020-2-- CPU testing software built "__DATE__" "__TIME__"\n");
+	puts("\nSoC - RiscV project UNAL 2020-2-- CPU testing software  interrupt "__DATE__" "__TIME__"\n");
 	help();
 	prompt();
 

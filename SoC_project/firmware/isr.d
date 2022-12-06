@@ -1,22 +1,27 @@
 isr.o: isr.c \
- /home/ferney/Escritorio/SoC_project/build/nexys4ddr/software/include/generated/csr.h \
- /home/ferney/Escritorio/SoC_project/build/nexys4ddr/software/include/generated/soc.h \
- /opt/litex/litex/litex/soc/software/include/base/stdint.h \
- /opt/litex/litex/litex/soc/cores/cpu/picorv32/system.h \
- /opt/litex/litex/litex/soc/software/include/hw/common.h \
- /opt/litex/litex/litex/soc/cores/cpu/picorv32/irq.h \
- /opt/litex/litex/litex/soc/software/include/base/uart.h
-
-/home/ferney/Escritorio/SoC_project/build/nexys4ddr/software/include/generated/csr.h:
-
-/home/ferney/Escritorio/SoC_project/build/nexys4ddr/software/include/generated/soc.h:
-
-/opt/litex/litex/litex/soc/software/include/base/stdint.h:
-
-/opt/litex/litex/litex/soc/cores/cpu/picorv32/system.h:
-
-/opt/litex/litex/litex/soc/software/include/hw/common.h:
-
-/opt/litex/litex/litex/soc/cores/cpu/picorv32/irq.h:
-
-/opt/litex/litex/litex/soc/software/include/base/uart.h:
+ /LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/software/include/generated/csr.h \
+ /LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/software/include/generated/soc.h \
+ /tools/PLitex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/stdint.h \
+ /tools/PLitex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/machine/_default_types.h \
+ /tools/PLitex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/sys/features.h \
+ /LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/software/include/../libc/picolibc.h \
+ /tools/PLitex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/sys/_intsup.h \
+ /tools/PLitex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/sys/_stdint.h \
+ /tools/PLitex/litex/litex/soc/cores/cpu/vexriscv/system.h \
+ /tools/PLitex/litex/litex/soc/cores/cpu/vexriscv/csr-defs.h \
+ /tools/PLitex/litex/litex/soc/software/include/hw/common.h \
+ /tools/PLitex/litex/litex/soc/cores/cpu/vexriscv/irq.h \
+ /tools/PLitex/litex/litex/soc/software/libbase/uart.h
+/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/software/include/generated/csr.h:
+/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/software/include/generated/soc.h:
+/tools/PLitex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/stdint.h:
+/tools/PLitex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/machine/_default_types.h:
+/tools/PLitex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/sys/features.h:
+/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/software/include/../libc/picolibc.h:
+/tools/PLitex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/sys/_intsup.h:
+/tools/PLitex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/sys/_stdint.h:
+/tools/PLitex/litex/litex/soc/cores/cpu/vexriscv/system.h:
+/tools/PLitex/litex/litex/soc/cores/cpu/vexriscv/csr-defs.h:
+/tools/PLitex/litex/litex/soc/software/include/hw/common.h:
+/tools/PLitex/litex/litex/soc/cores/cpu/vexriscv/irq.h:
+/tools/PLitex/litex/litex/soc/software/libbase/uart.h:

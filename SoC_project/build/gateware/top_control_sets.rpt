@@ -1,0 +1,145 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.1 (lin64) Build 3526262 Mon Apr 18 15:47:01 MDT 2022
+| Date         : Mon Dec  5 11:33:33 2022
+| Host         : johel-PC running 64-bit Ubuntu 22.04.1 LTS
+| Command      : report_control_sets -verbose -file top_control_sets.rpt
+| Design       : top
+| Device       : xc7a100t
+------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    67 |
+|    Minimum number of control sets                        |    67 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |   132 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    67 |
+| >= 0 to < 4        |     3 |
+| >= 4 to < 6        |    13 |
+| >= 6 to < 8        |     4 |
+| >= 8 to < 10       |     7 |
+| >= 10 to < 12      |     2 |
+| >= 12 to < 14      |     2 |
+| >= 14 to < 16      |     3 |
+| >= 16              |    33 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |             101 |           55 |
+| No           | No                    | Yes                    |               0 |            0 |
+| No           | Yes                   | No                     |             323 |          126 |
+| Yes          | No                    | No                     |            1031 |          375 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |             389 |          139 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++------------------------------+-------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------+------------------+----------------+--------------+
+|         Clock Signal         |                                       Enable Signal                                       |                                     Set/Reset Signal                                    | Slice Load Count | Bel Load Count | Bels / Slice |
++------------------------------+-------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------+------------------+----------------+--------------+
+|  clk_IBUF_BUFG               | serial_tx_rs232phytx_next_value_ce1                                                       | int_rst                                                                                 |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG               | VexRiscv/_zz_iBus_rsp_valid                                                               | VexRiscv/dataCache_1/reset0                                                             |                2 |              3 |         1.50 |
+|  cam_pclk_IBUF_BUFG          |                                                                                           |                                                                                         |                2 |              3 |         1.50 |
+|  camara/clk25_24/inst/clk25M |                                                                                           | camara/VGA_640x480/countX[8]_i_1_n_0                                                    |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG               | VexRiscv/IBusCachedPlugin_cache/uart_tx_fifo_level0_reg[3]                                | int_rst                                                                                 |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG               | uart_rx_fifo_syncfifo_re                                                                  | int_rst                                                                                 |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG               | rx_tick                                                                                   | rx_phase[31]_i_1_n_0                                                                    |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG               | tx_tick                                                                                   | tx_phase[31]_i_1_n_0                                                                    |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG               | uart_tx_fifo_syncfifo_re                                                                  | int_rst                                                                                 |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG               | uart_rx_fifo_wrport_we__0                                                                 | int_rst                                                                                 |                2 |              4 |         2.00 |
+|  clk_IBUF_BUFG               | VexRiscv/dataCache_1/when_CsrPlugin_l922_1                                                | VexRiscv/IBusCachedPlugin_cache/io_cpu_fetch_data_regNextWhen_reg[23]_0                 |                2 |              4 |         2.00 |
+|  camara/clk25_24/inst/clk25M | camara/VGA_640x480/p_1_in                                                                 | camara/VGA_640x480/countY[9]_i_1_n_0                                                    |                2 |              4 |         2.00 |
+|  cam_pclk_IBUF_BUFG          | camara/cam_read/DP_RAM_data_in__0[8]                                                      | int_rst                                                                                 |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG               | VexRiscv/IBusCachedPlugin_cache/uart_tx_fifo_readable_reg[0]                              | int_rst                                                                                 |                1 |              5 |         5.00 |
+|  clk_IBUF_BUFG               | VexRiscv/IBusCachedPlugin_cache/when_CsrPlugin_l1032                                      |                                                                                         |                2 |              5 |         2.50 |
+|  clk_IBUF_BUFG               | uart_rx_fifo_level0[4]_i_1_n_0                                                            | int_rst                                                                                 |                2 |              5 |         2.50 |
+|  camara/clk25_24/inst/clk25M |                                                                                           | int_rst                                                                                 |                3 |              6 |         2.00 |
+|  clk_IBUF_BUFG               |                                                                                           | VexRiscv/dataCache_1/SR[0]                                                              |                3 |              6 |         2.00 |
+|  camara/clk25_24/inst/clk25M | camara/VGA_640x480/countY[8]_i_1_n_0                                                      | int_rst                                                                                 |                2 |              6 |         3.00 |
+|  clk_IBUF_BUFG               | tx_data1_in0                                                                              |                                                                                         |                1 |              7 |         7.00 |
+|  cam_pclk_IBUF_BUFG          | camara/cam_read/DP_RAM_data_in__0[4]                                                      | int_rst                                                                                 |                3 |              8 |         2.67 |
+|  clk_IBUF_BUFG               | VexRiscv/IBusCachedPlugin_cache/when_InstructionCache_l338                                | VexRiscv/IBusCachedPlugin_cache/when_InstructionCache_l351                              |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG               | uart_rx_fifo_syncfifo_re                                                                  |                                                                                         |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG               | rx_data_rs232phyrx_next_value_ce1                                                         |                                                                                         |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG               | VexRiscv/dataCache_1/stageB_flusher_counter[7]_i_2_n_0                                    | VexRiscv/dataCache_1/stageB_flusher_counter[7]_i_1_n_0                                  |                3 |              8 |         2.67 |
+|  clk_IBUF_BUFG               | uart_tx_fifo_syncfifo_re                                                                  |                                                                                         |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG               |                                                                                           | VexRiscv/IBusCachedPlugin_cache/lineLoader_address_reg[12]_0                            |                4 |              8 |         2.00 |
+|  clk_IBUF_BUFG               |                                                                                           | VexRiscv/IBusCachedPlugin_cache/dataCache_1_io_mem_cmd_s2mPipe_rData_address_reg[14][0] |                3 |             10 |         3.33 |
+|  clk_IBUF_BUFG               |                                                                                           | VexRiscv/IBusCachedPlugin_cache/leds_storage[9]_i_3_0                                   |                2 |             10 |         5.00 |
+|  clk_IBUF_BUFG               | VexRiscv/IBusCachedPlugin_cache/uart_tx_fifo_level0_reg[3]                                |                                                                                         |                2 |             12 |         6.00 |
+|  clk_IBUF_BUFG               | uart_rx_fifo_wrport_we__0                                                                 |                                                                                         |                2 |             12 |         6.00 |
+|  camara/clk25_24/inst/clk25M |                                                                                           | camara/VGA_640x480/countX_reg[9]_1                                                      |                5 |             15 |         3.00 |
+|  clk_IBUF_BUFG               |                                                                                           | VexRiscv/IBusCachedPlugin_cache/SR[0]                                                   |                5 |             15 |         3.00 |
+|  cam_pclk_IBUF_BUFG          | camara/cam_read/DP_RAM_addr_in[14]_i_1_n_0                                                | int_rst                                                                                 |                5 |             15 |         3.00 |
+|  clk_IBUF_BUFG               | VexRiscv/IBusCachedPlugin_cache/dataCache_1_io_mem_cmd_s2mPipe_rData_address_reg[14]_0[0] | int_rst                                                                                 |                8 |             20 |         2.50 |
+|  clk_IBUF_BUFG               | sel                                                                                       | VexRiscv/IBusCachedPlugin_cache/int_rst_reg                                             |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG               |                                                                                           | VexRiscv/dataCache_1/reset0                                                             |               13 |             24 |         1.85 |
+|  clk_IBUF_BUFG               | VexRiscv/IBusCachedPlugin_cache/lineLoader_address[31]_i_1_n_0                            |                                                                                         |               10 |             27 |         2.70 |
+|  clk_IBUF_BUFG               | VexRiscv/dataCache_1/E[0]                                                                 |                                                                                         |               12 |             30 |         2.50 |
+|  clk_IBUF_BUFG               | VexRiscv/dataCache_1/execute_CsrPlugin_csr_773_reg[0]                                     |                                                                                         |               11 |             30 |         2.73 |
+|  clk_IBUF_BUFG               | VexRiscv/dataCache_1/stageB_mmuRsp_physicalAddress[30]_i_1_n_0                            |                                                                                         |               10 |             30 |         3.00 |
+|  clk_IBUF_BUFG               | VexRiscv/IBusCachedPlugin_cache/IBusCachedPlugin_fetchPc_booted_reg                       | VexRiscv/dataCache_1/reset0                                                             |               10 |             30 |         3.00 |
+|  clk_IBUF_BUFG               |                                                                                           | tx_phase[31]_i_1_n_0                                                                    |                8 |             31 |         3.88 |
+|  clk_IBUF_BUFG               |                                                                                           | rx_phase[31]_i_1_n_0                                                                    |                8 |             31 |         3.88 |
+|  clk_IBUF_BUFG               | timer_update_value_re                                                                     | int_rst                                                                                 |               13 |             32 |         2.46 |
+|  clk_IBUF_BUFG               | VexRiscv/memory_DivPlugin_div_result                                                      |                                                                                         |                8 |             32 |         4.00 |
+|  clk_IBUF_BUFG               | VexRiscv/IBusCachedPlugin_cache/dataCache_1_io_mem_cmd_s2mPipe_rData_address_reg[12]_1[0] | int_rst                                                                                 |               14 |             32 |         2.29 |
+|  clk_IBUF_BUFG               | VexRiscv/CsrPlugin_hadException                                                           |                                                                                         |               13 |             32 |         2.46 |
+|  clk_IBUF_BUFG               | VexRiscv/dataCache_1/execute_arbitration_isValid_reg_1[0]                                 |                                                                                         |               14 |             32 |         2.29 |
+|  clk_IBUF_BUFG               |                                                                                           | VexRiscv/IBusCachedPlugin_cache/lineLoader_address_reg[12]_1                            |               14 |             32 |         2.29 |
+|  clk_IBUF_BUFG               |                                                                                           | VexRiscv/IBusCachedPlugin_cache/count_reg_10_sn_1                                       |               15 |             32 |         2.13 |
+|  clk_IBUF_BUFG               | VexRiscv/memory_DivPlugin_rs1[0]                                                          | VexRiscv/dataCache_1/memory_DivPlugin_div_counter_willClear                             |               10 |             32 |         3.20 |
+|  clk_IBUF_BUFG               | VexRiscv/dataCache_1/execute_CsrPlugin_csr_3008_reg[0]                                    | VexRiscv/dataCache_1/reset0                                                             |               16 |             32 |         2.00 |
+|  clk_IBUF_BUFG               | VexRiscv/IBusCachedPlugin_cache/_zz_dBus_cmd_ready_reg[1][0]                              | int_rst                                                                                 |               11 |             32 |         2.91 |
+|  clk_IBUF_BUFG               | bus_errors                                                                                | int_rst                                                                                 |                8 |             32 |         4.00 |
+|  clk_IBUF_BUFG               |                                                                                           | VexRiscv/IBusCachedPlugin_cache/dataCache_1_io_mem_cmd_s2mPipe_rData_address_reg[12]_0  |                9 |             32 |         3.56 |
+|  clk_IBUF_BUFG               | VexRiscv/IBusCachedPlugin_cache/CsrPlugin_exceptionPortCtrl_exceptionContext_badAddr      |                                                                                         |               16 |             32 |         2.00 |
+|  clk_IBUF_BUFG               | VexRiscv/dataCache_1/memory_DivPlugin_div_done_reg_0[0]                                   |                                                                                         |                8 |             32 |         4.00 |
+|  clk_IBUF_BUFG               | VexRiscv/IBusCachedPlugin_cache/E[0]                                                      | int_rst                                                                                 |               11 |             32 |         2.91 |
+|  clk_IBUF_BUFG               | VexRiscv/IBusCachedPlugin_cache/decodeStage_hit_valid_reg_0                               |                                                                                         |               27 |             64 |         2.37 |
+|  clk_IBUF_BUFG               |                                                                                           | int_rst                                                                                 |               33 |             67 |         2.03 |
+|  clk_IBUF_BUFG               | VexRiscv/dataCache_1_io_mem_cmd_s2mPipe_ready                                             |                                                                                         |               18 |             70 |         3.89 |
+|  clk_IBUF_BUFG               | VexRiscv/dataCache_1_io_mem_cmd_ready                                                     |                                                                                         |               21 |             70 |         3.33 |
+|  clk_IBUF_BUFG               |                                                                                           |                                                                                         |               53 |             98 |         1.85 |
+|  clk_IBUF_BUFG               | VexRiscv/dataCache_1/when_CsrPlugin_l922_3                                                |                                                                                         |               48 |            140 |         2.92 |
+|  clk_IBUF_BUFG               | VexRiscv/dataCache_1/when_CsrPlugin_l922_1                                                |                                                                                         |               69 |            158 |         2.29 |
+|  clk_IBUF_BUFG               | VexRiscv/dataCache_1/memory_DivPlugin_div_counter_willClear                               |                                                                                         |               81 |            216 |         2.67 |
++------------------------------+-------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------+------------------+----------------+--------------+
+
+

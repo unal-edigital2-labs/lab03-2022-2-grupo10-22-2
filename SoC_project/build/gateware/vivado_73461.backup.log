@@ -1,0 +1,46 @@
+#-----------------------------------------------------------
+# Vivado v2022.1 (64-bit)
+# SW Build 3526262 on Mon Apr 18 15:47:01 MDT 2022
+# IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+# Start of session at: Mon Dec  5 10:55:32 2022
+# Process ID: 73461
+# Current directory: /LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware
+# Command line: vivado -mode batch -source top.tcl
+# Log file: /LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/vivado.log
+# Journal file: /LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/vivado.jou
+# Running On: johel-PC, OS: Linux, CPU Frequency: 1625.611 MHz, CPU Physical cores: 2, Host memory: 8224 MB
+#-----------------------------------------------------------
+source top.tcl
+# create_project -force -name top -part xc7a100t-CSG324-1
+create_project: Time (s): cpu = 00:00:10 ; elapsed = 00:00:07 . Memory (MB): peak = 2631.734 ; gain = 542.789 ; free physical = 1546 ; free virtual = 3633
+# set_msg_config -id {Common 17-55} -new_severity {Warning}
+# read_verilog {/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/camara.v}
+# read_verilog {/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/buffer_ram_dp.v}
+# read_verilog {/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/cam_read.v}
+# read_verilog {/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/VGA_driver.v}
+# read_verilog {/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/PLL/clk24_25_nexys4.v}
+# read_verilog {/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/PLL/clk24_25_nexys4_0.v}
+# read_verilog {/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/PLL/clk24_25_nexys4_clk_wiz.v}
+# read_verilog {/tools/PLitex/pythondata-cpu-vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv.v}
+# read_verilog {/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/top.v}
+# read_xdc top.xdc
+# set_property PROCESSING_ORDER EARLY [get_files top.xdc]
+# synth_design -directive default -top top -part xc7a100t-CSG324-1
+Command: synth_design -directive default -top top -part xc7a100t-CSG324-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 73482
+ERROR: [Synth 8-2543] port connections cannot be mixed ordered and named [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/camara.v:168]
+WARNING: [Synth 8-9887] parameter declaration becomes local in 'camara' with formal parameter declaration list [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/camara.v:54]
+WARNING: [Synth 8-9887] parameter declaration becomes local in 'camara' with formal parameter declaration list [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/camara.v:55]
+INFO: [Synth 8-8750] module 'camara' ignored due to previous errors [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/camara.v:203]
+Failed to read verilog '/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/camara.v'
+INFO: [Common 17-83] Releasing license: Synthesis
+7 Infos, 2 Warnings, 0 Critical Warnings and 2 Errors encountered.
+synth_design failed
+ERROR: [Common 17-69] Command failed: Synthesis failed - please see the console or run log file for details
+INFO: [Common 17-206] Exiting Vivado at Mon Dec  5 10:56:19 2022...

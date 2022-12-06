@@ -1,0 +1,112 @@
+#-----------------------------------------------------------
+# Vivado v2022.1 (64-bit)
+# SW Build 3526262 on Mon Apr 18 15:47:01 MDT 2022
+# IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+# Start of session at: Mon Dec  5 10:57:39 2022
+# Process ID: 73756
+# Current directory: /LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware
+# Command line: vivado -mode batch -source top.tcl
+# Log file: /LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/vivado.log
+# Journal file: /LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/vivado.jou
+# Running On: johel-PC, OS: Linux, CPU Frequency: 1200.000 MHz, CPU Physical cores: 2, Host memory: 8224 MB
+#-----------------------------------------------------------
+source top.tcl
+# create_project -force -name top -part xc7a100t-CSG324-1
+create_project: Time (s): cpu = 00:00:09 ; elapsed = 00:00:08 . Memory (MB): peak = 2611.734 ; gain = 5.961 ; free physical = 1659 ; free virtual = 3630
+# set_msg_config -id {Common 17-55} -new_severity {Warning}
+# read_verilog {/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/camara.v}
+# read_verilog {/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/buffer_ram_dp.v}
+# read_verilog {/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/cam_read.v}
+# read_verilog {/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/VGA_driver.v}
+# read_verilog {/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/PLL/clk24_25_nexys4.v}
+# read_verilog {/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/PLL/clk24_25_nexys4_0.v}
+# read_verilog {/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/PLL/clk24_25_nexys4_clk_wiz.v}
+# read_verilog {/tools/PLitex/pythondata-cpu-vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv.v}
+# read_verilog {/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/top.v}
+# read_xdc top.xdc
+# set_property PROCESSING_ORDER EARLY [get_files top.xdc]
+# synth_design -directive default -top top -part xc7a100t-CSG324-1
+Command: synth_design -directive default -top top -part xc7a100t-CSG324-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 73782
+WARNING: [Synth 8-9887] parameter declaration becomes local in 'camara' with formal parameter declaration list [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/camara.v:54]
+WARNING: [Synth 8-9887] parameter declaration becomes local in 'camara' with formal parameter declaration list [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/camara.v:55]
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 2611.742 ; gain = 0.000 ; free physical = 1110 ; free virtual = 2841
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'top' [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/top.v:20]
+INFO: [Synth 8-3876] $readmem data file 'top_rom.init' is read successfully [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/top.v:1824]
+INFO: [Synth 8-3876] $readmem data file 'top_sram.init' is read successfully [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/top.v:1839]
+INFO: [Synth 8-3876] $readmem data file 'top_main_ram.init' is read successfully [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/top.v:1862]
+INFO: [Synth 8-155] case statement is not full and has no default [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/top.v:1557]
+INFO: [Synth 8-155] case statement is not full and has no default [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/top.v:1566]
+INFO: [Synth 8-155] case statement is not full and has no default [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/top.v:1601]
+INFO: [Synth 8-155] case statement is not full and has no default [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/top.v:1615]
+INFO: [Synth 8-155] case statement is not full and has no default [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/top.v:1627]
+INFO: [Synth 8-155] case statement is not full and has no default [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/top.v:1636]
+INFO: [Synth 8-155] case statement is not full and has no default [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/top.v:1691]
+INFO: [Synth 8-6157] synthesizing module 'camara' [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/camara.v:21]
+INFO: [Synth 8-6157] synthesizing module 'clk24_25_nexys4' [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/PLL/clk24_25_nexys4.v:69]
+INFO: [Synth 8-6157] synthesizing module 'clk24_25_nexys4_clk_wiz' [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/PLL/clk24_25_nexys4_clk_wiz.v:69]
+INFO: [Synth 8-6157] synthesizing module 'BUFG' [/tools/Xilinx/Vivado/2022.1/scripts/rt/data/unisim_comp.v:1082]
+INFO: [Synth 8-6155] done synthesizing module 'BUFG' (0#1) [/tools/Xilinx/Vivado/2022.1/scripts/rt/data/unisim_comp.v:1082]
+INFO: [Synth 8-6157] synthesizing module 'MMCME2_ADV' [/tools/Xilinx/Vivado/2022.1/scripts/rt/data/unisim_comp.v:63509]
+	Parameter BANDWIDTH bound to: OPTIMIZED - type: string 
+	Parameter CLKFBOUT_MULT_F bound to: 9.750000 - type: double 
+	Parameter CLKFBOUT_PHASE bound to: 0.000000 - type: double 
+	Parameter CLKFBOUT_USE_FINE_PS bound to: FALSE - type: string 
+	Parameter CLKIN1_PERIOD bound to: 10.000000 - type: double 
+	Parameter CLKOUT0_DIVIDE_F bound to: 40.625000 - type: double 
+	Parameter CLKOUT0_DUTY_CYCLE bound to: 0.500000 - type: double 
+	Parameter CLKOUT0_PHASE bound to: 0.000000 - type: double 
+	Parameter CLKOUT0_USE_FINE_PS bound to: FALSE - type: string 
+	Parameter CLKOUT1_DIVIDE bound to: 39 - type: integer 
+	Parameter CLKOUT1_DUTY_CYCLE bound to: 0.500000 - type: double 
+	Parameter CLKOUT1_PHASE bound to: 0.000000 - type: double 
+	Parameter CLKOUT1_USE_FINE_PS bound to: FALSE - type: string 
+	Parameter CLKOUT4_CASCADE bound to: FALSE - type: string 
+	Parameter COMPENSATION bound to: ZHOLD - type: string 
+	Parameter DIVCLK_DIVIDE bound to: 1 - type: integer 
+	Parameter STARTUP_WAIT bound to: FALSE - type: string 
+INFO: [Synth 8-6155] done synthesizing module 'MMCME2_ADV' (0#1) [/tools/Xilinx/Vivado/2022.1/scripts/rt/data/unisim_comp.v:63509]
+INFO: [Synth 8-6155] done synthesizing module 'clk24_25_nexys4_clk_wiz' (0#1) [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/PLL/clk24_25_nexys4_clk_wiz.v:69]
+INFO: [Synth 8-6155] done synthesizing module 'clk24_25_nexys4' (0#1) [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/PLL/clk24_25_nexys4.v:69]
+WARNING: [Synth 8-7071] port 'locked' of module 'clk24_25_nexys4' is unconnected for instance 'clk25_24' [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/camara.v:100]
+WARNING: [Synth 8-7023] instance 'clk25_24' of module 'clk24_25_nexys4' has 5 connections declared, but only 4 given [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/camara.v:100]
+INFO: [Synth 8-6157] synthesizing module 'cam_read' [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/cam_read.v:21]
+	Parameter AW bound to: 15 - type: integer 
+	Parameter DW bound to: 12 - type: integer 
+INFO: [Synth 8-226] default block is never used [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/cam_read.v:64]
+INFO: [Synth 8-6155] done synthesizing module 'cam_read' (0#1) [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/cam_read.v:21]
+INFO: [Synth 8-6157] synthesizing module 'buffer_ram_dp' [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/buffer_ram_dp.v:27]
+INFO: [Synth 8-3876] $readmem data file '/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SocProject/sw/module/verilog/camara/imagen.men' is read successfully [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/buffer_ram_dp.v:68]
+INFO: [Synth 8-6155] done synthesizing module 'buffer_ram_dp' (0#1) [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/buffer_ram_dp.v:27]
+WARNING: [Synth 8-6104] Input port 'data_mem' has an internal driver [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/camara.v:164]
+WARNING: [Synth 8-6104] Input port 'dir_mem' has an internal driver [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/camara.v:165]
+WARNING: [Synth 8-7071] port 'rr' of module 'buffer_ram_dp' is unconnected for instance 'DP_RAM' [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/camara.v:153]
+WARNING: [Synth 8-7023] instance 'DP_RAM' of module 'buffer_ram_dp' has 9 connections declared, but only 8 given [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/camara.v:153]
+INFO: [Synth 8-6157] synthesizing module 'VGA_Driver' [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/VGA_driver.v:19]
+INFO: [Synth 8-6155] done synthesizing module 'VGA_Driver' (0#1) [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/VGA_driver.v:19]
+INFO: [Synth 8-6155] done synthesizing module 'camara' (0#1) [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/module/verilog/camara/camara.v:21]
+ERROR: [Synth 8-448] named port connection 'clk25M' does not exist for instance 'camara' of module 'camara' [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/top.v:1935]
+WARNING: [Synth 8-689] width (18) of port connection 'data_mem' does not match port width (12) of module 'camara' [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/top.v:1936]
+WARNING: [Synth 8-689] width (18) of port connection 'dir_mem' does not match port width (15) of module 'camara' [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/top.v:1937]
+INFO: [Synth 8-6157] synthesizing module 'VexRiscv' [/tools/PLitex/pythondata-cpu-vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv.v:7]
+INFO: [Synth 8-6157] synthesizing module 'InstructionCache' [/tools/PLitex/pythondata-cpu-vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv.v:5981]
+ERROR: [Synth 8-6156] failed synthesizing module 'InstructionCache' [/tools/PLitex/pythondata-cpu-vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv.v:5981]
+ERROR: [Synth 8-6156] failed synthesizing module 'VexRiscv' [/tools/PLitex/pythondata-cpu-vexriscv/pythondata_cpu_vexriscv/verilog/VexRiscv.v:7]
+ERROR: [Synth 8-6156] failed synthesizing module 'top' [/LabsDigital2/lab03-2022-2-grupo10-22-2-main/SoC_project/build/gateware/top.v:20]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:10 ; elapsed = 00:00:12 . Memory (MB): peak = 2611.742 ; gain = 0.000 ; free physical = 1032 ; free virtual = 2775
+---------------------------------------------------------------------------------
+RTL Elaboration failed
+INFO: [Common 17-83] Releasing license: Synthesis
+37 Infos, 10 Warnings, 0 Critical Warnings and 5 Errors encountered.
+synth_design failed
+ERROR: [Common 17-69] Command failed: Synthesis failed - please see the console or run log file for details
+INFO: [Common 17-206] Exiting Vivado at Mon Dec  5 10:58:25 2022...
