@@ -4,7 +4,7 @@
 ## Integrantes
 - `Carlo Johel Toscano Maldonado`: Ing. Electronica
 
-- `Nicolle Indira`: Ing Electonica
+- `Indira Nicolle Pulgar Carreño`: Ing Electonica
 
 # Introducción
 
