@@ -17,7 +17,7 @@ El Soc final, debera contar ademas con todos los perifericos, modulos, registros
 Para este proyecto no se incluyen muchas terminales fisicas a las que conectarse, ya que el nucleo, o el centro del trabajo seran los algoritmos de vision artificial que vayamos a emplear, por esta razon, solo se desarrollaron 2 terminales a conectar, la camara y la salida VGA, perifericos los cuales describimos en verilog debido a la alta dependencia hacia cambios en los relojes que estos tienen para funcionar.
 
 ## Diseño del system on Chip
-(https://raw.githubusercontent.com/Grupo10-22-2/lab03-2022-2-grupo10-22-2/master/DISENO_SOC.PNG)
+(https://raw.githubusercontent.com/Grupo10-22-2/lab03-2022-2-grupo10-22-2/master/main/DISENO_SOC.png)
 
 ## Camara
 Para describir en verilog la camara primero hay que saber cual dispositivo se va a seleccionar.
